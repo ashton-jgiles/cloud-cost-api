@@ -10,10 +10,10 @@ describe('UserService', () => {
 
   const mockUser: User = {
     id: 1,
-    first_name: 'John',
-    last_name: 'Doe',
-    base_rate: 50,
-    status: true,
+    email: 'john.doe@example.com',
+    name: 'John Doe',
+    created_at: '2025-08-21 05:21:30.148',
+    updated_at: '2025-08-21 05:21:30.148',
   };
 
   const mockRepository = {

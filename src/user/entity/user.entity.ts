@@ -6,14 +6,14 @@ export class User {
   id: number;
 
   @Column({ length: 100 })
-  first_name: string;
+  email: string;
 
   @Column({ length: 100 })
-  last_name: string;
+  name: string;
 
-  @Column({ name: 'base_rate', type: 'numeric' })
-  base_rate: number;
+  @Column()
+  created_at: string;
 
-  @Column({ default: 'active' })
-  status: boolean;
+  @Column()
+  updated_at: string;
 }
