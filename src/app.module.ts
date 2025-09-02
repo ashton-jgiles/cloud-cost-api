@@ -2,12 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // makes env vars available everywhere
+      isGlobal: true,
     }),
 
     TypeOrmModule.forRootAsync({
@@ -27,7 +26,6 @@ import { HealthModule } from './health/health.module';
       },
     }),
     UserModule,
-    HealthModule,
   ],
 })
 export class AppModule {}
