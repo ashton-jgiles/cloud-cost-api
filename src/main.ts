@@ -14,7 +14,6 @@ async function bootstrap() {
     await app.listen(port, '0.0.0.0');
     console.log(`✅ NestJS application is running on port ${port}`);
     
-    // Keep the process alive and log any unhandled errors
     process.on('unhandledRejection', (reason, promise) => {
       console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
     });
