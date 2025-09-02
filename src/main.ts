@@ -3,8 +3,12 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   try {
-    const app = await NestFactory.create(AppModule);
-    app.enableCors({ origin: 'http://localhost:5173' });
+    const app = await NestFactory.create(AppModule, { logger: false });
+    if (process.env.NODE_ENV !== 'production') {
+      app.enableCors({ origin: 'http://localhost:5174' });
+    } else {
+      app.enableCors({ origin: 'http://localhost:5173' });
+    }
     
     const port = process.env.PORT ?? 3000;
     console.log(`🚀 Starting NestJS application on port ${port}...`);
