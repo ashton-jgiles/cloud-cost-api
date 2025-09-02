@@ -5,7 +5,7 @@ async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule, { logger: false });
     if (process.env.NODE_ENV !== 'production') {
-      app.enableCors({ origin: 'http://localhost:5174' });
+      app.enableCors({ origin: 'http://localhost:5175' });
     } else {
       app.enableCors({ origin: 'http://localhost:5173' });
     }
