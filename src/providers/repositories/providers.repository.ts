@@ -1,15 +1,15 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
-import { Service } from '../entities/services.entity';
+import { Provider } from '../entities/providers.entity';
 
 @Injectable()
-export class ServicesRepository {
-  private readonly logger = new Logger(ServicesRepository.name);
+export class ProvidersRepository {
+  private readonly logger = new Logger(ProvidersRepository.name);
 
   constructor(
-    @InjectRepository(Service)
-    private readonly servicesRepository: Repository<Service>,
+    @InjectRepository(Provider)
+    private readonly providersRepository: Repository<Provider>,
     private readonly dataSource: DataSource,
   ) {}
 
@@ -18,28 +18,31 @@ export class ServicesRepository {
     const queryRunner = this.dataSource.createQueryRunner();
     try {
       await queryRunner.connect();
+      this.logger.debug(`Executing SQL: ${sql} with parameters: ${JSON.stringify(parameters)}`);
       const result = await queryRunner.query(sql, parameters);
+      this.logger.debug(`SQL execution successful, returned ${result?.length || 0} rows`);
       return result;
     } catch (error) {
+      this.logger.error(`SQL execution failed: ${error.message}`, error.stack);
       throw new Error(`Database query failed: ${error.message}`);
     } finally {
       await queryRunner.release();
     }
   }
 
-  async getServices(): Promise<any[]> {
+  async getProviders(): Promise<any[]> {
     try {
       const sql = `
           SELECT 
               id,
-              service_name,
-              provider_id,
-              service_desc
-          FROM services
+              provider_name
+          FROM providers
+          ORDER BY provider_name
       `;
       
       return await this.executeRawSQL(sql);
     } catch (error) {
+      this.logger.error(`Failed to get costs by provider: ${error.message}`);
       throw error;
     }
   }

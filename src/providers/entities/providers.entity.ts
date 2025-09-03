@@ -1,18 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity('services')
-export class Service {
+@Entity('providers')
+export class Provider {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 100 })
-  service_name: string;
-
-  @Column({ type: 'varchar', length: 100 })
-  provider_id: string;
-
-  @Column({ type: 'varchar', length: 100 })
-  service_desc: string;
+  provider_name: string;
 
   @CreateDateColumn()
   createdAt: Date;
